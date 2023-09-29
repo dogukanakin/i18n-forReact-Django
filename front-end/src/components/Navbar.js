@@ -25,7 +25,6 @@ const Navbar = ({ history }) => {
 
     // Yeni dil için ayarları güncelleyin
     fetch(apiUrls.languageSettings + '/', {
-      // Add a trailing slash to the URL
       method: 'PUT', // Use PUT method to update the language setting
       headers: {
         'Content-Type': 'application/json'
@@ -35,10 +34,18 @@ const Navbar = ({ history }) => {
       .then(response => response.json())
       .then(data => {
         console.log('Updated language setting:', data)
+
+        // Dil bilgisini çerez olarak kaydedin
+        document.cookie = `language=${newLanguage}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
       })
       .catch(error => {
         console.error('Error updating language setting:', error)
       })
+  }
+
+  function getCookie (name) {
+    const matches = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]+)`))
+    return matches ? matches[1] : undefined
   }
 
   return (

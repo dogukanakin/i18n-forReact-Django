@@ -2,11 +2,9 @@ import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import Backend from 'i18next-http-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import enTranslations from './locales/en/translation.json' // Import existing translations
-import frTranslations from './locales/fr/translation.json' // Import existing translations
-import trTranslations from './locales/tr/translation.json' // Import existing translations
-
-i18n.use(Backend).use(LanguageDetector).use(initReactI18next)
+import enTranslations from './locales/en/translation.json'
+import frTranslations from './locales/fr/translation.json'
+import trTranslations from './locales/tr/translation.json'
 
 i18n
   .use(Backend)
@@ -15,16 +13,20 @@ i18n
   .init({
     resources: {
       en: {
-        translation: { ...enTranslations } // Merge with existing translations
+        translation: { ...enTranslations }
       },
       fr: {
-        translation: { ...frTranslations } // Merge with existing translations
+        translation: { ...frTranslations }
       },
       tr: {
-        translation: { ...trTranslations } // Merge with existing translations
+        translation: { ...trTranslations }
       }
     },
     fallbackLng: 'en',
+    detection: {
+      order: ['cookie', 'localStorage', 'htmlTag', 'path', 'subdomain'],
+      caches: ['localStorage', 'cookie']
+    },
     interpolation: { escapeValue: false }
   })
 

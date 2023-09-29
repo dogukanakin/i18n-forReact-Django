@@ -39,14 +39,18 @@ module.exports = {
     'use strict'
     const parser = this.parser
     const content = fs.readFileSync(file.path, enc)
+
     let ns
     const match = content.match(/useTranslation\(.+\)/)
     if (match) ns = match[0].split(/(\'|\")/)[2]
+
     let count = 0
     parser.parseFuncFromString(
       content,
       { list: ['t'] },
+
       function (key, options) {
+        console.log('test', key)
         parser.set(
           key,
           Object.assign({}, options, {
@@ -73,6 +77,7 @@ module.exports = {
         ++count
       }
     )
+
     if (count > 0) {
       console.log(
         `i18next-scanner: count=${chalk.cyan(count)}, file=${chalk.yellow(
