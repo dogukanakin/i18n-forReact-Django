@@ -1,48 +1,32 @@
 import React, { useState, useEffect } from 'react'
-import { Table } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
+import './PostList.css'
 
 const apiUrls = {
-  tr: {
-    posts: 'http://127.0.0.1:8000/tr/api/posts',
-    categories: 'http://127.0.0.1:8000/tr/api/categories'
-  },
-  en: {
-    posts: 'http://127.0.0.1:8000/en/api/posts',
-    categories: 'http://127.0.0.1:8000/en/api/categories'
-  },
-  fr: {
-    posts: 'http://127.0.0.1:8000/fr/api/posts',
-    categories: 'http://127.0.0.1:8000/fr/api/categories'
-  }
+  tr: 'http://127.0.0.1:8000/tr/api/posts',
+  en: 'http://127.0.0.1:8000/en/api/posts',
+  fr: 'http://127.0.0.1:8000/fr/api/posts'
 }
 
 const PostList = () => {
   const { t, i18n } = useTranslation()
   const [posts, setPosts] = useState([])
-  const [categories, setCategories] = useState([])
-  const [language, setLanguage] = useState(i18n.language)
+  const language = i18n.language
 
   useEffect(() => {
     loadData()
   }, [language])
 
-  async function loadData () {
+  const loadData = async () => {
     try {
-      const [postsResponse, categoriesResponse] = await Promise.all([
-        fetch(apiUrls[language].posts),
-        fetch(apiUrls[language].categories)
-      ])
+      const response = await fetch(apiUrls[language])
 
-      if (!postsResponse.ok || !categoriesResponse.ok) {
+      if (!response.ok) {
         throw new Error('Veri çekme hatası')
       }
 
-      const postsData = await postsResponse.json()
-      const categoriesData = await categoriesResponse.json()
-
-      setPosts(postsData)
-      setCategories(categoriesData)
+      const postData = await response.json()
+      setPosts(postData)
     } catch (error) {
       console.error('Veri çekerken hata:', error)
     }
@@ -50,33 +34,23 @@ const PostList = () => {
 
   const renderPosts = () => {
     return posts.map(post => (
-      <tr key={post.id}>
-        <td>{getCategoryName(post.category.id)}</td>
-        <td>{post.title}</td>
-        <td>{post.content}</td>
-      </tr>
+      <div key={post.id} className='post-item'>
+        <img
+          src={post.image}
+          alt={post.image}
+          style={{ maxWidth: '200px', maxHeight: '200px', alignSelf: 'center' }}
+        />
+        <div className='post-details'>
+          <h3>{post.title}</h3>
+          <p>{post.content}</p>
+          <p>{post.description}</p>
+        </div>
+        <button className='btn btn-primary'>{t('readMore')}</button>
+      </div>
     ))
   }
 
-  const getCategoryName = categoryId => {
-    const category = categories.find(cat => cat.id === categoryId)
-    return category ? category.name : 'Unknown'
-  }
-
-  return (
-    <div>
-      <Table dark>
-        <thead>
-          <tr>
-            <th>{t('category')}</th>
-            <th>{t('title')}</th>
-            <th>{t('content')}</th>
-          </tr>
-        </thead>
-        <tbody>{renderPosts()}</tbody>
-      </Table>
-    </div>
-  )
+  return <div className='post-grid'>{renderPosts()}</div>
 }
 
 export default PostList

@@ -40,12 +40,20 @@ def index(request):
 def post_list(request):
     if request.method == 'GET':
         posts = Post.objects.all()
-        serializer = PostSerializer(posts, many=True)
+        serializer = PostSerializer(
+            posts, many=True, context={'request': request})
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
+
+            # Save the uploaded image file
+            image_file = request.FILES.get('image', None)
+            if image_file:
+                post = serializer.instance
+                post.image.save(image_file.name, image_file, save=True)
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

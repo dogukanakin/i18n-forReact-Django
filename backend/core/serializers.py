@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from django.conf import settings
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -15,12 +16,21 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id', 'title', 'content', 'description', 'category', 'image')
+        fields = ('id', 'title', 'content',
+                  'description', 'image', 'category',)
 
-    # def to_representation(self, instance):
-    #     representation = super().to_representation(instance)
-    #     representation['category'] = instance.category.name if instance.category else None
-    #     return representation
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['category'] = instance.category.name if instance.category else None
+
+    # Update the `image` field in the representation
+        return representation
+
+    def get_image(self, obj):
+        request = self.context.get('request')
+        if obj.image:
+            return request.build_absolute_uri(obj.image.url)
+        return None
 
 
 class MovieNameSerializer(serializers.ModelSerializer):

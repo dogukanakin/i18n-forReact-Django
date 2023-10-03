@@ -17,7 +17,7 @@ const Navbar = ({ history }) => {
 
     // Yeni dil için uygun domaini oluşturun
     const domain = window.location.host
-    const newUrl = `http://${domain}/${newLanguage}-${newLanguage}`
+    const newUrl = `http://${domain}/${newLanguage}-${newLanguage}/`
 
     // Sayfa URL'sini güncelleyin ve sayfayı yeniden yükleyin
     window.history.pushState({}, document.title, newUrl)

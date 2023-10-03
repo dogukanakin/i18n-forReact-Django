@@ -1,15 +1,15 @@
 {
-  "home": "",
-  "contact": "",
-  "movieList": "",
-  "ListPage": "",
-  "page.welcome.contact": "",
-  "Welcome on page222": "",
-  "Merhaba, dünya!": "",
-  "22Welcome on page2222": "",
-  "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem ": "",
-  "parag.description": "",
-  "category": "",
-  "title": "",
-  "content": ""
+  "home": "ana sayfa",
+  "contact": "iletişim",
+  "movieList": "film listesi",
+  "ListPage": "Liste Sayfası",
+  "page.welcome.contact": "sayfa.hoşgeldin.iletişim",
+  "Welcome on page222": "Sayfa222'ye hoş geldiniz",
+  "Merhaba, dünya!": "Merhaba, dünya!",
+  "22Welcome on page2222": "22Sayfa222'ye hoş geldiniz",
+  "lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? lorem ": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? Lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? Lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? Lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? Lorem lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum? Lorem ",
+  "parag.description": "paragraf açıklaması",
+  "category": "kategori",
+  "title": "başlık",
+  "content": "içerik"
 }

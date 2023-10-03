@@ -1,20 +1,20 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import PostList from './PostList'
-import Contact from './Contact'
+import './home.css'
 
-function Home () {
+const Home = () => {
   const { t } = useTranslation()
+
   return (
-    <>
-      <div class='alert alert-success' role='alert'>
-        <h1 class='display-6'>{t('parag.description')}</h1>
+    <div className='container'>
+      <header>
+        <h1>{t('home')}</h1>
+      </header>
+      <div className='alert alert-success' role='alert'>
         <PostList />
-        <br />
-        <Contact />
-        <br />
       </div>
-    </>
+    </div>
   )
 }
 
