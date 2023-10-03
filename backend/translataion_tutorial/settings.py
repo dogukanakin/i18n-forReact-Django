@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'parler',
     "rest_framework",
     'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -164,6 +165,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+# Actual directory user files go to
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'backend')
+
+# URL used to access the media
+MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

@@ -17,14 +17,18 @@ class Category(TranslatableModel):
 
 
 class Post(TranslatableModel):
-    category = models.ForeignKey(Category, related_name=_(
-        'category'), on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(
+        Category, related_name='posts', on_delete=models.SET_NULL, null=True, verbose_name=_("category")
+    )
     translations = TranslatedFields(
         title=models.CharField(_('title'), max_length=50),
         content=models.TextField(_('content')),
+        image=models.ImageField(upload_to='post_images/',),
+        description=models.TextField(verbose_name=_("description")),
     )
 
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(
+        auto_now_add=True, verbose_name=_("created"))
 
     class Meta:
         ordering = ('-created',)

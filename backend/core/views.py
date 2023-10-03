@@ -33,6 +33,8 @@ def index(request):
     context = {'posts': posts}
     return render(request, 'index.html', context)
 
+# do image upload here for rest api to json path
+
 
 @api_view(['GET', 'POST'])
 def post_list(request):
@@ -44,7 +46,6 @@ def post_list(request):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

@@ -2,7 +2,8 @@ from django.urls import path
 from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from core.views import post_list, category_list
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -12,4 +13,4 @@ urlpatterns = [
     path('api/movies/', views.movie_list),
     path('api/settings/', views.settings_list),
     path('api/lists/', views.list_list),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
