@@ -35,11 +35,7 @@ const PostList = () => {
   const renderPosts = () => {
     return posts.map(post => (
       <div key={post.id} className='post-item'>
-        <img
-          src={post.image}
-          alt={post.image}
-          style={{ maxWidth: '200px', maxHeight: '200px', alignSelf: 'center' }}
-        />
+        <img src={post.image} alt={post.image} />
         <div className='post-details'>
           <h3>{post.title}</h3>
           <p>{post.content}</p>

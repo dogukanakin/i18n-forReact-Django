@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 const apiUrls = {
   languageSettings: 'http://127.0.0.1:8000/tr/api/settings'
@@ -15,37 +15,18 @@ const Navbar = ({ history }) => {
     i18n.changeLanguage(newLanguage)
     setLanguage(newLanguage)
 
-    // Yeni dil için uygun domaini oluşturun
     const domain = window.location.host
     const newUrl = `http://${domain}/${newLanguage}-${newLanguage}/`
-
-    // Sayfa URL'sini güncelleyin ve sayfayı yeniden yükleyin
     window.history.pushState({}, document.title, newUrl)
     window.location.reload()
 
-    // Yeni dil için ayarları güncelleyin
     fetch(apiUrls.languageSettings + '/', {
-      method: 'PUT', // Use PUT method to update the language setting
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ language: newLanguage }) // Send the selected language in the request body
+      body: JSON.stringify({ language: newLanguage })
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Updated language setting:', data)
-
-        // Dil bilgisini çerez olarak kaydedin
-        document.cookie = `language=${newLanguage}; expires=Fri, 31 Dec 9999 23:59:59 GMT`
-      })
-      .catch(error => {
-        console.error('Error updating language setting:', error)
-      })
-  }
-
-  function getCookie (name) {
-    const matches = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]+)`))
-    return matches ? matches[1] : undefined
   }
 
   return (

@@ -6,10 +6,10 @@ import Navbar from './components/Navbar'
 import { I18nextProvider, useTranslation } from 'react-i18next'
 import i18n from './i18n'
 import { useEffect } from 'react'
-import { LanguageProvider } from './LanguageContext' // LanguageProvider ekleyin
 import NotFound from './pages/NotFound'
 import MovieList from './pages/MovieList'
 import ListPageForLanguageCode from './pages/ListPageForLanguageCode'
+import RedirectToLanguage from './pages/RedirectToLanguage'
 const App = () => {
   useEffect(() => {
     fixLanguageCodeInURL()
@@ -44,6 +44,8 @@ const App = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/MovieList' element={<MovieList />} />
         <Route path='/ListPage' element={<ListPageForLanguageCode />} />
+        <Route path='*' element={<NotFound />} />
+        <Route path='/redirect' element={<RedirectToLanguage />} />
       </Routes>
     )
   }
@@ -73,7 +75,10 @@ const App = () => {
             path='/ListPage'
             element={<Navigate to={localizedLink('/ListPage')} replace />}
           />
-          <Route path='*' element={<NotFound />} />
+          <Route
+            path='*'
+            element={<Navigate to={localizedLink('/NotFound')} replace />}
+          />
           <Route path='/:language/*' element={selectedRoute.element} />
         </Routes>
       </BrowserRouter>
